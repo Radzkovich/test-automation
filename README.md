@@ -17,3 +17,6 @@ Either way, every bug teaches me something new.
 ### Personal Motto
 
 "Confused today, stronger tomorrow."
+
+### Contacts
++ lregvjlke@gmail.com
