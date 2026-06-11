@@ -21,7 +21,7 @@ export class CartPage {
     }
 
     async isItemInCart(itemName) {
-        return await this.page.locator('.cart_item')
+        return await this.cartItems
             .filter({ hasText: itemName })
             .count() > 0;
     }
