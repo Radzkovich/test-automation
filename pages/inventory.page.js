@@ -26,4 +26,12 @@ export class InventoryPage {
     async openCart() {
         await this.cartButton.click();
     }
+
+    async sortHighToLow() {
+        await this.sortDropdown.selectOption('hilo');
+    }
+    
+    async getFirstItemName() {
+        return await this.itemNames.first().textContent();
+    }
 }
