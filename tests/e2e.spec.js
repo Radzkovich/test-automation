@@ -56,7 +56,5 @@ test('E2E: успешная покупка товара', async ({ page }) => {
     await checkoutStepTwoPage.finishCheckout();
 
     // Проверка успешного заказа
-    expect(await checkoutCompletePage.getCompletionMessage()
-    ).toBe('Thank you for your order!');
-
+    expect(await checkoutCompletePage.getCompletionMessage()).toBe('Thank you for your order!');
 });
