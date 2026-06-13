@@ -82,7 +82,21 @@ test.describe('API-тесты для Restful-booker', () => {
         const updatedBody = await updatedResponse.json();
         expect(updatedBody.firstname).toBe("Jack");
         expect(updatedBody.totalprice).toBe(222);
-     });
+    });
 
+    test('Удаление бронирования ', async ({ request }) => {
+        
+        const response = await request.delete(`${baseURL}/booking/${bookingId}`, {                            
+            headers: {
+                Cookie: `token=${authToken}`
+            }            
+        });
 
+        expect(response.status()).toBe(201);
+
+        const noData = await request.get(`${baseURL}/booking/${bookingId}`);
+
+        expect(noData.status()).toBe(404);
+
+    });
 });
