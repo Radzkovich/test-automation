@@ -5,8 +5,10 @@ test.describe('API-тесты для Restful-booker', () => {
 
     const baseURL = 'https://restful-booker.herokuapp.com';
     
+    let authToken;
     let bookingId;
-    let bookingData;      
+    let bookingData;
+    let updatedBookingData;      
 
     test('Создание бронирования', async ({ request }) => {
 
@@ -22,7 +24,7 @@ test.describe('API-тесты для Restful-booker', () => {
             "additionalneeds" : "Breakfast"
         }
 
-        const response = await request.post(`${baseURL}/booking`, { data:bookingData });
+        const response = await request.post(`${baseURL}/booking`, { data: bookingData });
         
         expect(response.status()).toBe(200);
         
@@ -45,6 +47,42 @@ test.describe('API-тесты для Restful-booker', () => {
 
         expect(responseBody).toEqual(bookingData);
     });
+
+    test('Обновление бронирования', async ({ request }) => {
+
+        const authResponse = await request.post(`${baseURL}/auth`, {
+            data: {
+                "username": "admin",
+                "password": "password123",
+            }
+        });
+
+        expect(authResponse.status()).toBe(200);
+
+        const authBody = await authResponse.json();
+
+        authToken = authBody.token;
+
+        updatedBookingData = {
+            ...bookingData,
+            firstname: "Jack",
+            totalprice: 222
+        };
+
+
+        const updatedResponse = await request.put(`${baseURL}/booking/${bookingId}`, {
+            data: updatedBookingData,                
+            headers: {
+                Cookie: `token=${authToken}`                
+            }            
+        });
+
+        expect(updatedResponse.status()).toBe(200);
+        
+        const updatedBody = await updatedResponse.json();
+        expect(updatedBody.firstname).toBe("Jack");
+        expect(updatedBody.totalprice).toBe(222);
+     });
 
 
 });
