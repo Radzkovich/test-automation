@@ -8,7 +8,7 @@ import { CheckoutStepTwoPage } from '../pages/checkout.step.two.page';
 import { CheckoutCompletePage } from '../pages/checkout.complete.page';
 
 
-test('E2E: успешная покупка товара', async ({ page }) => {
+test('@ui E2E: успешная покупка товара', async ({ page }) => {
     // 1. Инициализируем наши Page objects, передавая им объект 'page'
     const loginPage = new LoginPage(page);
     const inventoryPage = new InventoryPage(page);
